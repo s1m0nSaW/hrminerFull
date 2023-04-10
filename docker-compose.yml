@@ -1,0 +1,23 @@
+version: '3.8'
+
+volumes:
+  mongodb_volume:
+
+services:
+  finfreedb:
+    image: "mongo"
+    volumes:
+      - mongodb_volume:/data/db
+    restart: always
+    
+  hrminer:
+    build: ./hrminer
+    ports: 
+      - "80:3000"
+    restart: always
+
+  server:
+    build: ./hrMinerBack
+    ports:
+      - "5000:5000"
+    restart: always
